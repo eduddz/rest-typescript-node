@@ -5,14 +5,18 @@
   "main": "./dist/index.js",
   "scripts": {
     "start": "node ./",
-    "build": "tsc -p ."
+    "build": "tsc -p .",
+    "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules --no-notify src/index.ts"
   },
   "author": "José Eduardo Dorta Esteves",
   "license": "MIT",
   "dependencies": {
+    "express": "^4.17.3",
     "typescript": "^4.6.3"
   },
   "devDependencies": {
-    "@types/node": "^17.0.23"
+    "@types/express": "^4.17.13",
+    "@types/node": "^17.0.23",
+    "ts-node-dev": "^1.1.8"
   }
 }
