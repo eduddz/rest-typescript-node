@@ -1,5 +1,13 @@
 # Arquitetura Rest 🔥🏆
 
+Rotas 📌
+
+    get:    /users
+    get:    /users/:uuid
+    post    /users
+    put     /users/:uuid
+    delete: /users/:uuid
+
 Code 👨‍💻
 
 Iniciando o Projeto
@@ -25,3 +33,7 @@ Para criar o servidor
 Para ficar atualizando o servidor
 
     yarn add ts-node-dev -D
+
+Para verficiar o status do servidor
+
+    yarn add http-status-codes
