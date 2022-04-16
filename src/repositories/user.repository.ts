@@ -1,28 +1,38 @@
 import { db } from "../db";
+import { DatabaseError } from "../models/errors/database.error.models";
 import { IUser } from "../models/user.model";
 
 
 class UserRepository {
     async findAllUser(): Promise<IUser[]> {
-        const query = `
-            SELECT uuid, username FROM application_user
-        `;
+        try {
 
-        const { rows } = await db.query<IUser>(query);
-    
-        return rows || [];
+            const query = `
+            SELECT uuid, username FROM application_user
+            `;
+            
+            const { rows } = await db.query<IUser>(query);   
+            return rows || [];
+        } catch(error) {
+            throw new DatabaseError("Erro na consulta pelos usuarios", error);
+        }
+        
     }
 
     async findById(uuid: string): Promise<IUser> {
-        const query = `
-            SELECT uuid, username FROM application_user WHERE uuid = $1
-        `;
-        const values = [uuid];
+        try {
+            const query = `
+                SELECT uuid, username FROM application_user WHERE uuid = $1
+            `;
+            const values = [uuid];
 
-        const { rows } = await db.query<IUser>(query, values);
-        const [ user ] = rows;
+            const { rows } = await db.query<IUser>(query, values);
+            const [ user ] = rows;
 
-        return user;
+            return user;
+        } catch(error) {
+            throw new DatabaseError("Erro na consulta por ID", error);
+        }
     }
 
     async create(user: IUser): Promise<string> {

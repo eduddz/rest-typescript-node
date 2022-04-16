@@ -37,3 +37,14 @@ Para ficar atualizando o servidor
 Para verficiar o status do servidor
 
     yarn add http-status-codes
+
+Para criação do bando de dados
+
+    yarn add pg
+    |
+    yarn add @types/pg -D
+
+Será usado um banco de dados online
+
+    www.elephantsql.com
+

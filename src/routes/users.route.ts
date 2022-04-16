@@ -5,15 +5,22 @@ import userRepository from "../repositories/user.repository";
 export const usersRoute = Router();
 
 usersRoute.get("/users", async (req: Request, res: Response, next: NextFunction) => {
-    const users = await userRepository.findAllUser();
-
-    res.status(StatusCodes.OK).send(users);
-});0
+    try {
+        const users = await userRepository.findAllUser();
+        res.status(StatusCodes.OK).send(users);
+    } catch(error) {
+        next(error);
+    }
+});
 
 usersRoute.get("/users/:uuid", async (req: Request<{ uuid: string }>, res: Response, next: NextFunction) => {
-    const uuid = req.params.uuid;
-    const user = await userRepository.findById(uuid);
-    res.status(StatusCodes.OK).send(user);
+    try {
+        const uuid = req.params.uuid;
+        const user = await userRepository.findById(uuid);
+        res.status(StatusCodes.OK).send(user);
+    } catch(error) {
+        next(error);
+    }
 });
 
 usersRoute.post("/users", async (req: Request, res: Response, next: NextFunction) => {
@@ -25,7 +32,6 @@ usersRoute.post("/users", async (req: Request, res: Response, next: NextFunction
 usersRoute.put("/users/:uuid", async (req: Request<{ uuid: string }>, res: Response, next: NextFunction) => {
     const uuid = req.params.uuid;
     const modifiedUser = req.body;
-    console.log(req.body);
 
     modifiedUser.uuid = uuid;
 
